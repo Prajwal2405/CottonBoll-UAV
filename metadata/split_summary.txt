@@ -1,0 +1,19 @@
+postdefoliation: train=657 (65%)  test=182 (18%)  buffer=172 (17%)
+  test strip A: u <= -59.5 m   test strip B: u >= 58.6 m   buffer 13 m inward of each
+predefoliation: train=544 (64%)  test=154 (18%)  buffer=148 (17%)
+  test strip A: u <= -60.6 m   test strip B: u >= 62.2 m   buffer 13 m inward of each
+postdefoliation: min along-axis distance test<->train = 13.0 m (footprint 12.7 m)
+predefoliation: min along-axis distance test<->train = 13.0 m (footprint 12.7 m)
+
+Axis definition (added for the public release, 2026-11-19; reproduces the split above exactly)
+  u is the along-track coordinate, per field, in metres:
+  1. Project each frame's GPS position to a local flat-earth plane about the field's mean
+     position: east = (lon - lon0) * 111320 * cos(lat0), north = (lat - lat0) * 111320.
+  2. Flight axis = median direction (mod 180 deg) of the displacement between consecutive
+     frames in capture order (pre: 2.31 deg, post: 101.08 deg, counter-clockwise from east).
+  3. u = position projected onto that axis (centred on the field mean).
+  With this definition every frame is reassigned to its listed split (0 mismatches) and the
+  minimum along-track test<->train separation is 13.04 m (pre) and 13.05 m (post).
+  Implied strip limits: pre u <= -60.59 / u >= 62.17; post u <= -59.53 / u >= 58.67
+  (the post upper limit is printed above as 58.6; the 0.07 m difference changes no label).
+  metadata/frames.csv x_m = u - min(u); y_m = across-track coordinate - its minimum.

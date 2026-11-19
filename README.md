@@ -22,21 +22,38 @@ The imagery and labels are too large for GitHub and are archived separately (see
 
 ## Data
 
-**Download:** `DATA_DOI_OR_LINK` <!-- TODO: replace with the Zenodo / Ag Data Commons DOI -->
+**Download:** [Dataset DOI: coming soon (being deposited)](DATA_DOI_OR_LINK) <!-- TODO: replace DATA_DOI_OR_LINK with the Zenodo / Ag Data Commons DOI -->
 
 The archive contains:
 
-| File | Contents |
-|---|---|
-| `cotton_train_pre.zip` | Pre-defoliation training tiles |
-| `cotton_train_post.zip` | Post-defoliation training tiles |
-| `cotton_test_tiles.zip` | Test-region tiles |
-| `labels_train_pre.zip`, `labels_train_post.zip` | Automatically generated, cross-view-filtered training labels (YOLO format) |
-| `eval_set_verified.zip` | The 1,215 verified evaluation tiles and labels (YOLO format) |
-| `eval_set_coco.json` | The same evaluation set in COCO format |
-| `frames_*.zip` | Full-resolution frames (GPS metadata removed) | <!-- TODO: once the raw frames are located -->
+| File | Contents | Size |
+|---|---|---|
+| `frames_pre_defoliation.zip` | 846 full-resolution pre-defoliation frames (5280 × 3956 px) | 9.81 GB |
+| `frames_post_defoliation.zip` | 1,011 full-resolution post-defoliation frames | 11.79 GB |
+| `frames_low_altitude.zip` | 590 frames from a low-altitude pre-defoliation pass (not part of the benchmark; see [Notes on the data](#notes-on-the-data)) | 6.51 GB |
+| `eval_set_tiles.zip` | The 1,215 verified evaluation tiles (640 × 640 px) | 326 MB |
+| `eval_set_coco.json` | Evaluation-set labels in COCO format (217,045 boxes) | 39.4 MB |
+| `eval_set_yolo_labels.zip` | The same labels in YOLO format (one `.txt` per tile, class 0 = `cotton_boll`) | 3.2 MB |
+| `train_labels_yolo.zip` | Training labels in YOLO format for the 96,080 training tiles (one `.txt` per tile, 15.7 M boxes after cross-tile agreement filtering), plus `classes.txt` and a note on the file names | 253 MB |
+| `metadata.zip` | `frames.csv` (per-frame field, run, sequence, split, local x/y in metres) and `split_summary.txt` | 31 KB |
+| `SHA256SUMS.txt` | SHA-256 checksums of all of the above | |
+
+**Tiles** are not distributed separately: generate them from the frames with `make_tiles.py` (640 × 640 px, 100 px overlap, 80 tiles per frame). With OpenCV 4.13 the output is byte-identical to the tiles used in the paper.
+
+```bash
+python make_tiles.py --frames frames_pre_defoliation --out tiles/pre --split train
+```
 
 Tile file names encode their source frame and position, e.g. `DJI_20250929091533_0001_D_r0_c9_x4640_y0.jpg` = frame `DJI_20250929091533_0001_D`, row 0, column 9, top-left corner at (4640, 0) px.
+
+**Training labels** are in `train_labels_yolo.zip`: `labels/<tile>.txt` uses the same names as the tiles, so `make_tiles.py --split train` produces exactly the matching images (43,520 pre-defoliation + 52,560 post-defoliation). Labels exist only for training frames; none are released for test or buffer frames.
+
+### Notes on the data
+
+- **Privacy.** GPS coordinates and device serial numbers were removed from all frames. Camera calibration (`DewarpData`, calibrated focal length, optical centre), gimbal and flight angles, and relative altitude are retained. Frame positions are given in `metadata/frames.csv` in a local metric frame (no latitude/longitude).
+- **Low-altitude pass.** The low-altitude pass is not part of the benchmark. 11 of its 590 frames lie within footprint range of pre-defoliation test or buffer frames, so do not train on the low-altitude frames if you evaluate on the benchmark test split.
+- **Relative altitude.** In the low-altitude pass, relative altitude is measured from the take-off point, not the ground.
+- **Splits.** `splits/*.txt` are the authoritative split; `verify_split.py` checks them (see [Splits](#splits)).
 
 ## Repository layout
 
@@ -47,7 +64,10 @@ notebooks/
   3_evaluation/     evaluation on the verified set, operating-point sweep, retained-vs-added analysis
   4_experiments/    random-vs-spatial split (Sec. 5.5), cross-condition transfer (Sec. 5.4), figures
   5_edge_kv260/     ReLU variant used for the AMD Kria KV260 deployment (Sec. 6)
-splits/             tile lists for every experiment in the paper
+splits/             frame-level spatial split, and tile lists for every experiment in the paper
+metadata/           per-frame table (field, mission run, split, local x/y in metres) and split summary
+verify_split.py     checks the split counts, disjointness and the 13 m test/train separation
+make_tiles.py       regenerates the 640 x 640 tiles (and their file names) from the released frames
 configs/            exact Ultralytics training arguments for each baseline
 results/            the result tables behind the paper, plus per-epoch training logs
 audit/              provenance records for the annotator seed set and the evaluation-set edits
@@ -55,8 +75,24 @@ audit/              provenance records for the annotator seed set and the evalua
 
 ### Splits
 
+**The text files in `splits/` (`splits/*.txt`) are the authoritative split definition.** The frame-level spatial split is `splits/split_train.txt`, `splits/split_test.txt` and `splits/split_buffer.txt` (one frame stem per line). Every tile inherits the split of its source frame, and buffer frames are used for neither training nor testing.
+
+| Field | Train | Test | Buffer |
+|---|---|---|---|
+| Pre-defoliation | 544 | 154 | 148 |
+| Post-defoliation | 657 | 182 | 172 |
+
+`metadata/frames.csv` lists every frame with its field, mission run, DJI sequence number, split and local along-track/across-track position in metres (no latitude/longitude). `metadata/split_summary.txt` records the strip limits and the flight-axis definition. To check the split:
+
+```bash
+python verify_split.py
+```
+
+This verifies the counts above, that no frame is in two splits, that `metadata/frames.csv` agrees with `splits/*.txt`, and that every test frame is at least 13.0 m from every training frame along the flight axis (13.04 m pre-defoliation, 13.05 m post-defoliation).
+
 | File | Used for |
 |---|---|
+| `splits/split_train.txt`, `splits/split_test.txt`, `splits/split_buffer.txt` | Frame-level spatial split (authoritative) |
 | `splits/eval_set_tiles.txt` | The 1,215 tiles of the verified evaluation set |
 | `splits/baseline_subset_30k.json` | Stratified training subset for the baselines (`train`: 28,574, `val`: 1,503, both from training regions) |
 | `splits/transfer_subsets.json` | Single-field training subsets for the transfer experiment |
