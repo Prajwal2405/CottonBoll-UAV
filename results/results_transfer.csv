@@ -1,0 +1,7 @@
+trained_on,tested_on,matched,n_tiles,P,R,F1
+pre,pre,True,598,0.947,0.8856,0.9153
+pre,post,False,602,0.9097,0.901,0.9053
+post,pre,False,598,0.8992,0.9016,0.9004
+post,post,True,602,0.9229,0.9311,0.927
+both,pre,,598,0.959,0.8696,0.9121
+both,post,,602,0.9322,0.9234,0.9278

@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this dataset or code, please cite the paper below."
+title: "CottonBoll-UAV"
+type: dataset
+authors:
+  - family-names: "Mahesha Sethurani"
+    given-names: "Prajwal"
+    affiliation: "The University of Texas at Dallas"
+  - family-names: "Sundaravadivel"
+    given-names: "Prabha"
+    affiliation: "The University of Texas at Tyler"
+  - family-names: "Valluvan"
+    given-names: "Varun"
+    affiliation: "The University of Texas at Tyler"
+  - family-names: "Tamil"
+    given-names: "Lakshman"
+    affiliation: "The University of Texas at Dallas"
+  - family-names: "Torbert"
+    given-names: "H. Allen"
+    affiliation: "USDA-ARS"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "CottonBoll-UAV: Dense Small-Object Detection in UAV Imagery for Automated Cotton Yield Estimation"
+  authors:
+    - family-names: "Mahesha Sethurani"
+      given-names: "Prajwal"
+    - family-names: "Sundaravadivel"
+      given-names: "Prabha"
+    - family-names: "Valluvan"
+      given-names: "Varun"
+    - family-names: "Tamil"
+      given-names: "Lakshman"
+    - family-names: "Torbert"
+      given-names: "H. Allen"
+  collection-title: "Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops"
+  year: 2027

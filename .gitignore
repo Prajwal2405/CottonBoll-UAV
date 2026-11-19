@@ -1,0 +1,10 @@
+# Large artifacts live in the data archive or in GitHub Releases, not in git
+*.pt
+*.onnx
+*.xmodel
+*.zip
+runs/
+data/
+.ipynb_checkpoints/
+__pycache__/
+.DS_Store

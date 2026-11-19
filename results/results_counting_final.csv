@@ -1,0 +1,4 @@
+model,conf,MAE,bias,rel_err_pct
+yolo11n,0.3,6.92,-4.73,9.4
+yolo11s,0.35,6.27,-3.79,8.9
+yolov5nu,0.25,7.46,-1.28,8.3

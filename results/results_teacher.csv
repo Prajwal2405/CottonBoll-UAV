@@ -1,0 +1,4 @@
+model,subset,mAP50,mAP50_95,recall
+teacher_11s,all,0.9718,0.9702,0.9998
+teacher_11s,teacher-derived,0.9783,0.9776,1.0
+teacher_11s,human-added,0.0986,0.0968,0.9985

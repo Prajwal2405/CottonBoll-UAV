@@ -1,0 +1,7 @@
+protocol,conf,P,R,F1
+random split,0.25,0.8517,0.9677,0.906
+spatial split,0.25,0.8644,0.9632,0.9111
+random split,0.3,0.8723,0.9594,0.9138
+spatial split,0.3,0.8843,0.9541,0.9179
+random split,0.35,0.8904,0.9497,0.9191
+spatial split,0.35,0.9016,0.9442,0.9224

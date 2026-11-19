@@ -1,0 +1,7 @@
+model,subset,n_boxes,mAP50,mAP50_95,recall
+yolo11n,teacher-derived,192679,0.9755,0.8401,0.9977
+yolo11n,human-added,24366,0.0763,0.0508,0.9684
+yolo11s,teacher-derived,192679,0.975,0.8498,0.9982
+yolo11s,human-added,24366,0.0781,0.053,0.9703
+yolov5nu,teacher-derived,192679,0.9748,0.8446,0.9981
+yolov5nu,human-added,24366,0.0743,0.0497,0.9714

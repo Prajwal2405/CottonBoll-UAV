@@ -1,0 +1,6 @@
+ultralytics>=8.4.115,<8.5
+torch>=2.11
+pycocotools
+numpy
+pandas
+matplotlib
