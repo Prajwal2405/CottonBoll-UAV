@@ -21,7 +21,7 @@ authors:
 license: MIT
 preferred-citation:
   type: conference-paper
-  title: "CottonBoll-UAV: Dense Small-Object Detection in UAV Imagery for Automated Cotton Yield Estimation"
+  title: "CottonBoll-UAV: A Spatially Disjoint UAV Dataset and Baseline Evaluation for Dense Cotton Boll Detection"
   authors:
     - family-names: "Mahesha Sethurani"
       given-names: "Prajwal"

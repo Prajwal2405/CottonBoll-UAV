@@ -4,7 +4,7 @@ A spatially disjoint UAV benchmark for dense cotton boll detection.
 
 This repository holds the code, splits, configs, result tables and baseline weights for the WACV 2027 Harvest-Vision workshop paper:
 
-> **CottonBoll-UAV: Dense Small-Object Detection in UAV Imagery for Automated Cotton Yield Estimation**
+> **CottonBoll-UAV: A Spatially Disjoint UAV Dataset and Baseline Evaluation for Dense Cotton Boll Detection**
 > Prajwal Mahesha Sethurani, Prabha Sundaravadivel, Varun Valluvan, Lakshman Tamil, H. Allen Torbert
 
 The imagery and labels are too large for GitHub and are archived separately (see [Data](#data)).
@@ -35,7 +35,8 @@ The archive contains:
 | `eval_set_coco.json` | Evaluation-set labels in COCO format (217,045 boxes) | 39.4 MB |
 | `eval_set_yolo_labels.zip` | The same labels in YOLO format (one `.txt` per tile, class 0 = `cotton_boll`) | 3.2 MB |
 | `train_labels_yolo.zip` | Training labels in YOLO format for the 96,080 training tiles (one `.txt` per tile, 15.7 M boxes after cross-tile agreement filtering), plus `classes.txt` and a note on the file names | 253 MB |
-| `metadata.zip` | `frames.csv` (per-frame field, run, sequence, split, local x/y in metres) and `split_summary.txt` | 31 KB |
+| `metadata.zip` | `frames.csv` (per-frame field, run, sequence, split, local x/y in metres), `split_summary.txt` and the split files `splits/split_{train,test,buffer}.txt` | 39 KB |
+| `README.txt` | Description of the dataset and every file | 8 KB |
 | `SHA256SUMS.txt` | SHA-256 checksums of all of the above | |
 
 **Tiles** are not distributed separately: generate them from the frames with `make_tiles.py` (640 × 640 px, 100 px overlap, 80 tiles per frame). With OpenCV 4.13 the output is byte-identical to the tiles used in the paper.
@@ -113,11 +114,11 @@ This verifies the counts above, that no frame is in two splits, that `metadata/f
 
 ## Baseline weights
 
-Download from the [Releases](../../releases) page:
+Download from the [v1.0 release](../../releases/tag/v1.0) (checksums in `weights_SHA256SUMS.txt`):
 
 | Model | File | Params | F1 (verified set) | Operating conf. |
 |---|---|---|---|---|
-| YOLOv5n-u | `yolov5nu_best.pt` | 2.50 M | 0.920 | 0.25 |
+| YOLOv5n-u | `yolov5nu_best.pt` | 2.51 M | 0.920 | 0.25 |
 | YOLO11n | `yolo11n_best.pt` | 2.59 M | 0.924 | 0.30 |
 | YOLO11s | `yolo11s_best.pt` | 9.43 M | 0.929 | 0.35 |
 | Annotator (YOLO11s) | `annotator_yolo11s.pt` | 9.43 M | — | 0.30 (proposals) |
@@ -144,7 +145,7 @@ metrics = model.val(data="eval_set.yaml", imgsz=640, max_det=1000, conf=0.001, i
 
 ```bibtex
 @inproceedings{sethurani2027cottonboll,
-  title     = {CottonBoll-UAV: Dense Small-Object Detection in UAV Imagery for Automated Cotton Yield Estimation},
+  title     = {CottonBoll-UAV: A Spatially Disjoint UAV Dataset and Baseline Evaluation for Dense Cotton Boll Detection},
   author    = {Mahesha Sethurani, Prajwal and Sundaravadivel, Prabha and Valluvan, Varun and Tamil, Lakshman and Torbert, H. Allen},
   booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops},
   year      = {2027}
