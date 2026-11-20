@@ -22,7 +22,7 @@ The imagery and labels are too large for GitHub and are archived separately (see
 
 ## Data
 
-**Download:** [Dataset DOI: coming soon (being deposited)](DATA_DOI_OR_LINK) <!-- TODO: replace DATA_DOI_OR_LINK with the Zenodo / Ag Data Commons DOI -->
+**Download:** [Dataset DOI: 10.15482/USDA.ADC/35069569 (Ag Data Commons; publication pending curator review)](https://doi.org/10.15482/USDA.ADC/35069569)
 
 The archive contains:
 
@@ -149,6 +149,14 @@ metrics = model.val(data="eval_set.yaml", imgsz=640, max_det=1000, conf=0.001, i
   author    = {Mahesha Sethurani, Prajwal and Sundaravadivel, Prabha and Valluvan, Varun and Tamil, Lakshman and Torbert, H. Allen},
   booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops},
   year      = {2027}
+}
+
+@misc{cottonbolluav_data,
+  author    = {Mahesha Sethurani, Prajwal and Sundaravadivel, Prabha and Valluvan, Varun and Tamil, Lakshman and Torbert, H. Allen},
+  title     = {{CottonBoll-UAV}: A Spatially Disjoint {UAV} Dataset and Baseline Evaluation for Dense Cotton Boll Detection},
+  year      = {2026},
+  publisher = {Ag Data Commons},
+  doi       = {10.15482/USDA.ADC/35069569}
 }
 ```
 

@@ -19,6 +19,10 @@ authors:
     given-names: "H. Allen"
     affiliation: "USDA-ARS"
 license: MIT
+identifiers:
+  - type: doi
+    value: "10.15482/USDA.ADC/35069569"
+    description: "Dataset on Ag Data Commons"
 preferred-citation:
   type: conference-paper
   title: "CottonBoll-UAV: A Spatially Disjoint UAV Dataset and Baseline Evaluation for Dense Cotton Boll Detection"
