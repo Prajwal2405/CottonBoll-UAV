@@ -25,7 +25,7 @@ identifiers:
     description: "Dataset on Ag Data Commons"
 preferred-citation:
   type: conference-paper
-  title: "CottonBoll-UAV: A Spatially Disjoint UAV Dataset and Baseline Evaluation for Dense Cotton Boll Detection"
+  title: "CottonBoll-UAV: Dense Small-Object Detection in UAV Imagery for Automated Cotton Yield Estimation"
   authors:
     - family-names: "Mahesha Sethurani"
       given-names: "Prajwal"

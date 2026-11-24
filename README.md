@@ -4,7 +4,7 @@ A spatially disjoint UAV benchmark for dense cotton boll detection.
 
 This repository holds the code, splits, configs, result tables and baseline weights for the WACV 2027 Harvest-Vision workshop paper:
 
-> **CottonBoll-UAV: A Spatially Disjoint UAV Dataset and Baseline Evaluation for Dense Cotton Boll Detection**
+> **CottonBoll-UAV: Dense Small-Object Detection in UAV Imagery for Automated Cotton Yield Estimation**
 > Prajwal Mahesha Sethurani, Prabha Sundaravadivel, Varun Valluvan, Lakshman Tamil, H. Allen Torbert
 
 The imagery and labels are too large for GitHub and are archived separately (see [Data](#data)).
@@ -145,7 +145,7 @@ metrics = model.val(data="eval_set.yaml", imgsz=640, max_det=1000, conf=0.001, i
 
 ```bibtex
 @inproceedings{sethurani2027cottonboll,
-  title     = {CottonBoll-UAV: A Spatially Disjoint UAV Dataset and Baseline Evaluation for Dense Cotton Boll Detection},
+  title     = {CottonBoll-UAV: Dense Small-Object Detection in UAV Imagery for Automated Cotton Yield Estimation},
   author    = {Mahesha Sethurani, Prajwal and Sundaravadivel, Prabha and Valluvan, Varun and Tamil, Lakshman and Torbert, H. Allen},
   booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops},
   year      = {2027}
@@ -153,7 +153,7 @@ metrics = model.val(data="eval_set.yaml", imgsz=640, max_det=1000, conf=0.001, i
 
 @misc{cottonbolluav_data,
   author    = {Mahesha Sethurani, Prajwal and Sundaravadivel, Prabha and Valluvan, Varun and Tamil, Lakshman and Torbert, H. Allen},
-  title     = {{CottonBoll-UAV}: A Spatially Disjoint {UAV} Dataset and Baseline Evaluation for Dense Cotton Boll Detection},
+  title     = {Data from: {CottonBoll-UAV}: Dense Small-Object Detection in {UAV} Imagery for Automated Cotton Yield Estimation},
   year      = {2026},
   publisher = {Ag Data Commons},
   doi       = {10.15482/USDA.ADC/35069569}
