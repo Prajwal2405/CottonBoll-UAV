@@ -162,7 +162,7 @@ metrics = model.val(data="eval_set.yaml", imgsz=640, max_det=1000, conf=0.001, i
 
 ## License
 
-Code: MIT (see `LICENSE`). Data: CC BY 4.0 (see the data record).
+Code: MIT (see `LICENSE`). Data: CC0 1.0 Universal (public domain dedication; see the data record).
 
 ## Acknowledgments
 
